@@ -34,7 +34,9 @@
   }
   .slide.active{opacity:1; visibility:visible; transform:none}
   .slide.prev{transform:translateY(-24px) scale(.992)}
-  .wrap{width:min(1180px,100%); max-height:100%}
+  .wrap{width:min(1180px,100%); max-height:100%; overflow-y:auto; overflow-x:hidden}
+  .wrap::-webkit-scrollbar{width:6px} .wrap::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14); border-radius:3px}
+  code{font-family:"Consolas",ui-monospace,monospace; background:rgba(255,255,255,.08); padding:1px 5px; border-radius:5px; font-size:.86em; color:var(--gold)}
 
   /* ---------- chrome ---------- */
   .topbar{position:fixed; top:0; left:0; right:0; height:4px; background:rgba(255,255,255,.06); z-index:30}
@@ -154,7 +156,42 @@
   .rc h4{font-size:15px; margin:8px 0 6px; line-height:1.2}
   .rc p{font-size:12px; color:var(--muted); line-height:1.45}
 
+  /* step1 comparison */
+  .s1head{text-align:center; margin-bottom:24px}
+  .s1head .eyebrow{margin-bottom:14px}
+  .s1head h2{font-size:clamp(24px,3.2vw,40px)}
+  .s1head .lead{margin:12px auto 0; text-align:center; max-width:60ch}
+  .cmp{display:grid; grid-template-columns:1fr auto 1fr; gap:clamp(14px,2.4vw,30px); align-items:stretch}
+  .vsbadge{align-self:center; width:46px; height:46px; border-radius:50%; display:grid; place-items:center;
+    font-weight:800; font-size:13px; letter-spacing:.06em; color:var(--ink);
+    background:linear-gradient(150deg,rgba(84,224,212,.25),rgba(255,122,77,.25));
+    border:1px solid var(--line)}
+  .cmpcard{border:1px solid var(--line); border-radius:18px; overflow:hidden; background:var(--panel);
+    display:flex; flex-direction:column}
+  .cmpcard.vil{box-shadow:inset 0 0 0 1px rgba(255,200,97,.10)}
+  .cmpcard.stg{box-shadow:inset 0 0 0 1px rgba(84,224,212,.12)}
+  .cmpcard .thumb{height:104px; width:100%; object-fit:cover; display:block}
+  .cmpcard .pad{padding:15px 18px 17px; display:flex; flex-direction:column; gap:12px; flex:1}
+  .cmpcard .head h3{font-size:18px; display:flex; align-items:center; gap:9px}
+  .cmpcard .head .k{font-size:11px; letter-spacing:.16em; text-transform:uppercase; font-weight:700; margin-bottom:6px}
+  .cmpcard.vil .k{color:var(--gold)} .cmpcard.stg .k{color:var(--teal)}
+  .cmpcard .head p{font-size:12.5px; color:var(--muted); line-height:1.45; margin-top:5px}
+  .specs{display:flex; flex-direction:column; gap:0; border-top:1px solid var(--line)}
+  .specs .row{display:grid; grid-template-columns:84px 1fr; gap:10px; padding:8px 0; border-bottom:1px solid rgba(255,255,255,.05); font-size:12.5px; line-height:1.4}
+  .specs .row dt{color:var(--faint); font-weight:600; letter-spacing:.02em}
+  .specs .row dd{color:var(--ink)}
+  .specs .row dd .no{color:var(--coral); font-size:11px}
+  .palette{display:flex; flex-direction:column; gap:7px}
+  .palette .lbl{font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint)}
+  .sw{display:flex; gap:6px; flex-wrap:wrap}
+  .sw i{width:26px; height:26px; border-radius:7px; border:1px solid rgba(255,255,255,.18); position:relative}
+  .sw i::after{content:attr(data-n); position:absolute; bottom:-15px; left:50%; transform:translateX(-50%);
+    font-size:8.5px; color:var(--faint); white-space:nowrap}
+  .palette.named .sw{margin-bottom:14px}
+
   @media (max-width:860px){
+    .cmp{grid-template-columns:1fr; gap:16px}
+    .vsbadge{justify-self:center}
     .slide{padding:18px 16px 80px}
     .split,.split.rev,.styles{grid-template-columns:1fr; gap:18px}
     .recap{grid-template-columns:1fr 1fr}
@@ -192,27 +229,73 @@
   <!-- 1 · STEP 1 -->
   <section class="slide">
     <div class="wrap">
-      <div class="split">
-        <div class="copy">
-          <span class="eyebrow"><span class="num">1</span> 진단 &amp; 화풍 정의</span>
-          <h2>먼저 “무엇을 만드는가”를<br>못 박았다</h2>
-          <p class="lead">에셋 라이브러리를 분석해 <b class="tealc">크로노스피어 한 게임</b>에 두 용도가 섞여 있음을 확인. (‘스텔라 킹덤’은 별개 게임이 아닌 <span class="accent">마을 명칭</span>)</p>
-          <ul class="facts">
-            <li><b>마을 구성 GUI</b> — 외곽선 + 셀셰이딩 쿼터뷰 오브젝트<small>건물·소품, 마을을 꾸미고 배치</small></li>
-            <li><b>인게임 스테이지 배경</b> — 외곽선 없는 페인터리 2:1 횡스크롤<small>전투가 벌어지는 배경</small></li>
-            <li>용도별 <b>스타일 가이드 2종</b>(MD·HTML) 작성 — 팔레트·구도·해상도 규격 고정</li>
-          </ul>
-        </div>
-        <div class="visual styles">
-          <div class="stylecard vil">
-            <img src="assets/village_style.jpg" alt="마을 GUI 스타일시트">
-            <div class="body"><div class="k">① 마을 GUI</div><h3>셀셰이딩 오브젝트</h3>
-            <p>짙은 갈색 외곽선 · 2~3단 셀셰이딩 · 따뜻한 파스텔 + 코랄 포인트 · 둥글통통 쿼터뷰</p></div>
+      <div class="s1head">
+        <span class="eyebrow" style="justify-content:center"><span class="num">1</span> 진단 &amp; 화풍 정의</span>
+        <h2>먼저 “무엇을, 어떤 화풍으로” 만드는가를 못 박았다</h2>
+        <p class="lead">기존 에셋 라이브러리를 분석해 <b class="tealc">크로노스피어 한 게임</b> 안에 <span class="accent">정반대 화풍 두 용도</span>가 섞여 있음을 확인. (‘스텔라 킹덤’은 별개 게임이 아니라 게임 속 <b>마을 명칭</b>) → 용도별 <b>스타일 가이드 2종</b>을 작성해 팔레트·핵심 규칙·구도·해상도·체크리스트·AI 프롬프트 템플릿까지 규격으로 고정했다.</p>
+      </div>
+      <div class="cmp">
+        <!-- village -->
+        <div class="cmpcard vil">
+          <img class="thumb" src="assets/village_style.jpg" alt="마을 GUI 스타일시트">
+          <div class="pad">
+            <div class="head">
+              <div class="k">① 마을 구성 GUI</div>
+              <h3>🏘️ 셀셰이딩 오브젝트</h3>
+              <p>마을을 꾸미고 배치하는 쿼터뷰 건물·소품. 시티빌더형 동화풍 스프라이트.</p>
+            </div>
+            <dl class="specs">
+              <div class="row"><dt>외곽선</dt><dd>짙은 갈색 <code>#3A2A1E</code> · 균일 두께 <span class="no">(검정 ✕)</span></dd></div>
+              <div class="row"><dt>셰이딩</dt><dd>2~3단 셀셰이딩, 면 단위 분리 <span class="no">(그라데이션 ✕)</span></dd></div>
+              <div class="row"><dt>시점</dt><dd>30~45° 쿼터뷰(아이소메트릭)</dd></div>
+              <div class="row"><dt>형태·색</dt><dd>둥글통통 · 고채도 따뜻한 파스텔 + 코랄 포인트</dd></div>
+              <div class="row"><dt>배경</dt><dd>투명 PNG + 바닥 드롭섀도우</dd></div>
+              <div class="row"><dt>해상도</dt><dd>고해상 원본(성 5200×5600) → 다운스케일</dd></div>
+            </dl>
+            <div class="palette named">
+              <span class="lbl">대표 팔레트</span>
+              <div class="sw">
+                <i style="background:#3A2A1E" data-n="외곽선"></i>
+                <i style="background:#C8965A" data-n="목재"></i>
+                <i style="background:#E0D6C2" data-n="석재"></i>
+                <i style="background:#E27B4F" data-n="코랄"></i>
+                <i style="background:#5FA52E" data-n="잎"></i>
+                <i style="background:#8A95A3" data-n="금속"></i>
+              </div>
+            </div>
           </div>
-          <div class="stylecard stg">
-            <img src="assets/stage_style.jpg" alt="스테이지 배경 스타일시트">
-            <div class="body"><div class="k">② 스테이지 배경</div><h3>페인터리 횡스크롤</h3>
-            <p>외곽선 없음 · 원/중/전경 3레이어 · 바이옴 단일 색 테마 · 하단 비워 플레이 공간 확보</p></div>
+        </div>
+
+        <div class="vsbadge">VS</div>
+
+        <!-- stage -->
+        <div class="cmpcard stg">
+          <img class="thumb" src="assets/stage_style.jpg" alt="스테이지 배경 스타일시트">
+          <div class="pad">
+            <div class="head">
+              <div class="k">② 인게임 스테이지 배경</div>
+              <h3>🗺️ 페인터리 횡스크롤</h3>
+              <p>전투가 벌어지는 2:1 가로 무대. 라인 없는 회화풍 디지털 페인팅.</p>
+            </div>
+            <dl class="specs">
+              <div class="row"><dt>외곽선</dt><dd>없음 — 부드러운 붓터치 페인팅</dd></div>
+              <div class="row"><dt>셰이딩</dt><dd>그라데이션·블렌딩 <span class="no">(셀셰이딩 ✕)</span></dd></div>
+              <div class="row"><dt>구도</dt><dd>2:1 횡스크롤 · 원/중/전경 3레이어 · 하단 비움</dd></div>
+              <div class="row"><dt>색감</dt><dd>바이옴마다 단일 색 테마로 지배</dd></div>
+              <div class="row"><dt>연출</dt><dd>갓레이 · 대기 원근 · 파티클/블룸 · 비네팅</dd></div>
+              <div class="row"><dt>해상도</dt><dd>2048×1024 (보스 2600×1600 · 투기장 2560×1080)</dd></div>
+            </dl>
+            <div class="palette named">
+              <span class="lbl">바이옴 테마색</span>
+              <div class="sw">
+                <i style="background:#7EC8E8" data-n="해변"></i>
+                <i style="background:#6FA83C" data-n="정령숲"></i>
+                <i style="background:#D89050" data-n="사막"></i>
+                <i style="background:#3FB0C8" data-n="설원"></i>
+                <i style="background:#E8521E" data-n="화염"></i>
+                <i style="background:#F0B020" data-n="황금"></i>
+              </div>
+            </div>
           </div>
         </div>
       </div>
