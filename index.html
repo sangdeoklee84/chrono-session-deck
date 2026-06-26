@@ -150,11 +150,42 @@
   .linkrow .go{color:var(--teal); font-size:18px}
 
   /* closing recap */
-  .recap{display:grid; grid-template-columns:repeat(5,1fr); gap:13px; margin-top:30px}
-  .rc{padding:18px 14px; border-radius:14px; background:var(--panel); border:1px solid var(--line); text-align:left}
-  .rc .n{font-size:12px; color:var(--teal); font-weight:700; letter-spacing:.1em}
-  .rc h4{font-size:15px; margin:8px 0 6px; line-height:1.2}
-  .rc p{font-size:12px; color:var(--muted); line-height:1.45}
+  .recap{display:grid; grid-template-columns:repeat(6,1fr); gap:11px; margin-top:28px}
+  .rc{padding:15px 13px; border-radius:13px; background:var(--panel); border:1px solid var(--line); text-align:left}
+  .rc .n{font-size:11px; color:var(--teal); font-weight:700; letter-spacing:.08em}
+  .rc h4{font-size:14px; margin:7px 0 5px; line-height:1.2}
+  .rc p{font-size:11.5px; color:var(--muted); line-height:1.42}
+
+  /* step2 — refine loop */
+  .s2head{text-align:center; margin-bottom:8px}
+  .s2head .eyebrow{margin-bottom:12px}
+  .s2head h2{font-size:clamp(23px,3.1vw,38px)}
+  .s2head .lead{margin:11px auto 0; text-align:center; max-width:62ch}
+  .loop{display:flex; gap:8px; flex-wrap:wrap; justify-content:center; align-items:center; margin:20px 0 22px}
+  .loop span{font-size:12.5px; padding:7px 14px; border-radius:999px; background:var(--panel);
+    border:1px solid var(--line); color:var(--ink)}
+  .loop span.hl{border-color:rgba(84,224,212,.5); color:var(--teal)}
+  .loop i{color:var(--faint); font-style:normal; font-size:13px}
+  .loop .rep{color:var(--coral); font-size:12px; font-weight:700}
+  .iter{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+  .itercard{border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--panel); position:relative}
+  .itercard.bad{box-shadow:inset 0 0 0 1px rgba(255,90,70,.25)}
+  .itercard.good{box-shadow:inset 0 0 0 1px rgba(84,224,212,.35)}
+  .itercard img{width:100%; height:150px; object-fit:cover; display:block; object-position:center 30%}
+  .itercard .v{position:absolute; top:10px; left:10px; font-size:11px; font-weight:700; padding:4px 10px;
+    border-radius:7px; letter-spacing:.03em; backdrop-filter:blur(3px)}
+  .itercard.bad .v{background:rgba(214,67,49,.9); color:#fff}
+  .itercard.good .v{background:rgba(84,224,212,.92); color:#06231f}
+  .itercard .ic{padding:12px 15px 14px}
+  .itercard .ic h4{font-size:14px; margin-bottom:4px}
+  .itercard .ic p{font-size:12px; color:var(--muted); line-height:1.42}
+  .itercard .ic .mv{display:block; margin-top:7px; font-size:10.5px; color:var(--faint);
+    font-variant-numeric:tabular-nums; letter-spacing:.01em}
+  .refine{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:22px}
+  .refcol{border:1px solid var(--line); border-radius:14px; background:var(--panel); padding:16px 18px}
+  .refcol > h3{font-size:15px; margin-bottom:11px; display:flex; align-items:center; gap:8px}
+  .refcol.vil > h3{color:var(--gold)} .refcol.stg > h3{color:var(--teal)}
+  .refcol ul.facts li{font-size:13px}
 
   /* step1 comparison */
   .s1head{text-align:center; margin-bottom:24px}
@@ -216,13 +247,14 @@
       <p class="sub">한 게임, 두 화풍 — <span class="tealc">마을 GUI</span>와 <span class="accent">인게임 스테이지 배경</span>을<br>AI 파이프라인으로 양산한 과정 5단계</p>
       <div class="chips">
         <span class="chip"><b>01</b>진단 &amp; 화풍 정의</span>
-        <span class="chip"><b>02</b>생성 파이프라인</span>
-        <span class="chip"><b>03</b>마을 GUI 에셋</span>
-        <span class="chip"><b>04</b>스테이지 배경</span>
-        <span class="chip"><b>05</b>팀 배포 &amp; 온보딩</span>
+        <span class="chip"><b>02</b>스타일·규약 구체화</span>
+        <span class="chip"><b>03</b>생성 파이프라인</span>
+        <span class="chip"><b>04</b>마을 GUI 에셋</span>
+        <span class="chip"><b>05</b>스테이지 배경</span>
+        <span class="chip"><b>06</b>팀 배포 &amp; 온보딩</span>
       </div>
       <div class="meta">2026.06 · Higgsfield MCP · GPT Image 2 · Gemini Nano Banana</div>
-      <div class="hint">이동: <kbd>→</kbd> <kbd>Space</kbd> 다음 · <kbd>←</kbd> 이전 · <kbd>1</kbd>~<kbd>6</kbd> 점프</div>
+      <div class="hint">이동: <kbd>→</kbd> <kbd>Space</kbd> 다음 · <kbd>←</kbd> 이전 · <kbd>숫자키</kbd> 점프</div>
     </div>
   </section>
 
@@ -302,7 +334,59 @@
     </div>
   </section>
 
-  <!-- 2 · STEP 2 -->
+  <!-- 2 · STEP 2 (NEW) — 스타일·규약 구체화 -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="s2head">
+        <span class="eyebrow" style="justify-content:center"><span class="num">2</span> 스타일·규약 구체화</span>
+        <h2>큰 원칙을 실측·반복으로 ‘수치 규약’까지 끌어내렸다</h2>
+        <p class="lead">가이드의 방향만으론 매번 결과가 흔들렸다. <b class="tealc">공식 에셋과 실측 비교 → 교정</b>을 반복해, 외곽선 두께부터 명도·채도·플레이필드 밴드까지 <span class="accent">측정 가능한 규칙</span>으로 못 박았다.</p>
+      </div>
+      <div class="loop">
+        <span>📐 공식 실측</span><i>→</i><span>🎨 생성</span><i>→</i><span class="hl">📊 값 비교</span><i>→</i><span>🛠️ 교정</span><i>↻</i><span class="rep">반복</span>
+      </div>
+      <div class="iter">
+        <div class="itercard bad">
+          <span class="v">1차 ✕ 너무 어두움</span>
+          <img src="assets/village_iter1.jpg" alt="1차 — 과채도·저명도">
+          <div class="ic"><h4>과채도 · 저명도</h4><p>어둡고 진해 동화풍 톤을 벗어남.</p>
+            <span class="mv">명도 88–131 · 채도 48–67% · SD 54–56</span></div>
+        </div>
+        <div class="itercard bad">
+          <span class="v">2차 ✕ 과교정</span>
+          <img src="assets/village_iter2.jpg" alt="2차 — 창백·외곽선 실종">
+          <div class="ic"><h4>창백 · 외곽선 실종</h4><p>너무 밝혀 저채도·라인이 사라짐.</p>
+            <span class="mv">채도 26–38% · near-black 0% · 외곽선 ✕</span></div>
+        </div>
+        <div class="itercard good">
+          <span class="v">3차 ✓ 채택</span>
+          <img src="assets/village_01.jpg" alt="3차 — 중간값 채택">
+          <div class="ic"><h4>중간값이 정답</h4><p>또렷한 외곽선 + AO 볼륨 + 중간 콘트라스트.</p>
+            <span class="mv">목표 명도 140–160 · 채도 40–45% · SD ~45</span></div>
+        </div>
+      </div>
+      <div class="refine">
+        <div class="refcol vil">
+          <h3>🏘️ 마을 GUI 규약</h3>
+          <ul class="facts">
+            <li>공식 평균 <b>명도 130–150 · 채도 37–44%</b>를 타깃으로 고정</li>
+            <li><b>베이스 타일 규격</b> — 2:1 아이소 다이아몬드(1.96:1, ≈27°)</li>
+            <li>접지 footprint만 타일 안, <b>처마·모자 챙은 밖 OK</b></li>
+          </ul>
+        </div>
+        <div class="refcol stg">
+          <h3>🗺️ 스테이지 배경 규약</h3>
+          <ul class="facts">
+            <li>반실사 1차본 폐기 → <b>카툰 화풍 + 실사 배제</b> 문구 필수</li>
+            <li><b>플레이필드</b> — 50% 칼끊김, 하단 절반 빈 레인 · HUD 세이프존</li>
+            <li>명도 가드레일 · 지면 비일직선 · <b>가로 루프 타일링</b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · STEP 3 -->
   <section class="slide">
     <div class="wrap">
       <div class="split rev">
@@ -319,7 +403,7 @@
           </div>
         </div>
         <div class="copy">
-          <span class="eyebrow"><span class="num">2</span> 생성 파이프라인 구축</span>
+          <span class="eyebrow"><span class="num">3</span> 생성 파이프라인 구축</span>
           <h2>누구나 같은 결과를<br>뽑는 4갈래 경로</h2>
           <p class="lead">개발자부터 비개발 팀원까지 커버하도록 생성 경로를 <b class="tealc">표준화</b>. 일관성은 <span class="accent">i2i 스타일 앵커</span>로 잠갔다.</p>
           <ul class="facts">
@@ -336,7 +420,7 @@
     <div class="wrap">
       <div class="split">
         <div class="copy">
-          <span class="eyebrow"><span class="num">3</span> 마을 GUI 에셋 제작</span>
+          <span class="eyebrow"><span class="num">4</span> 마을 GUI 에셋 제작</span>
           <h2>셀셰이딩 건물,<br>타일 위에 세우다</h2>
           <p class="lead">할로윈 식당 3종으로 규약을 검증. 공식 에셋과 <b class="tealc">실측 비교 + 3회 반복</b>으로 색·볼륨을 맞췄다.</p>
           <ul class="facts">
@@ -374,7 +458,7 @@
           <div class="figure"><span class="tag">초원 드루이드 · 벨트스크롤</span><img src="assets/stage_druid_01.jpg" alt="정령 토템"></div>
         </div>
         <div class="copy">
-          <span class="eyebrow"><span class="num">4</span> 인게임 스테이지 배경 제작</span>
+          <span class="eyebrow"><span class="num">5</span> 인게임 스테이지 배경 제작</span>
           <h2>플레이 가능한<br>페인터리 배경</h2>
           <p class="lead">배경이 아니라 <b class="tealc">전투 무대</b>. 반실사로 흐르지 않게 카툰 화풍으로 고정하고, 게임 규칙을 구도에 새겼다.</p>
           <ul class="facts">
@@ -392,7 +476,7 @@
     <div class="wrap">
       <div class="split">
         <div class="copy">
-          <span class="eyebrow"><span class="num">5</span> 팀 배포 &amp; 온보딩</span>
+          <span class="eyebrow"><span class="num">6</span> 팀 배포 &amp; 온보딩</span>
           <h2>혼자가 아니라<br>팀이 쓰는 프로토콜로</h2>
           <p class="lead">생성 과정을 <b class="tealc">용도별 repo</b>로 분리하고, 공개 <span class="accent">온보딩 페이지</span>로 누구나 따라 하도록 배포.</p>
           <ul class="facts">
@@ -422,10 +506,11 @@
       <h2>진단부터 팀 배포까지,<br>한 사이클을 완성했다</h2>
       <div class="recap">
         <div class="rc"><div class="n">STEP 1</div><h4>화풍 정의</h4><p>한 게임 · 두 용도, 가이드 2종</p></div>
-        <div class="rc"><div class="n">STEP 2</div><h4>파이프라인</h4><p>4경로 + i2i 앵커 표준화</p></div>
-        <div class="rc"><div class="n">STEP 3</div><h4>마을 GUI</h4><p>셀셰이딩 · 타일 · 투명 컷아웃</p></div>
-        <div class="rc"><div class="n">STEP 4</div><h4>스테이지</h4><p>페인터리 · 플레이필드 · 루프</p></div>
-        <div class="rc"><div class="n">STEP 5</div><h4>팀 배포</h4><p>repo 분리 + 공개 온보딩</p></div>
+        <div class="rc"><div class="n">STEP 2</div><h4>규약 구체화</h4><p>실측·반복으로 수치 규약 확정</p></div>
+        <div class="rc"><div class="n">STEP 3</div><h4>파이프라인</h4><p>4경로 + i2i 앵커 표준화</p></div>
+        <div class="rc"><div class="n">STEP 4</div><h4>마을 GUI</h4><p>셀셰이딩 · 타일 · 투명 컷아웃</p></div>
+        <div class="rc"><div class="n">STEP 5</div><h4>스테이지</h4><p>페인터리 · 플레이필드 · 루프</p></div>
+        <div class="rc"><div class="n">STEP 6</div><h4>팀 배포</h4><p>repo 분리 + 공개 온보딩</p></div>
       </div>
       <div class="hint" style="margin-top:34px">라이브 온보딩 · github.com/sangdeoklee84/chrono-kingdom-gen2</div>
     </div>
